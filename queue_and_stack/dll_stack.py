@@ -3,21 +3,27 @@
 # sys.path.append('../doubly_linked_list')
 # sys.path.append('../Lambda/python/Data-Structures/doubly_linked_list')
 
+# FIRST IN LAST OUT
+
 
 class Stack:
     def __init__(self):
         self.size = 0
         # Why is our DLL a good choice to store our elements?
-        # self.storage = ?
+        self.storage = DoublyLinkedList()
 
     def push(self, value):
-        pass
+        self.storage.add_to_head(value)
+        self.size += 1
 
     def pop(self):
-        pass
+        if not self.storage.head:
+            return
+        return self.storage.remove_from_head()
+        self.size -= 1
 
     def len(self):
-        pass
+        return self.storage.length
 
 
 class ListNode:
