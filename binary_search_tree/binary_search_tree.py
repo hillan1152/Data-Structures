@@ -1,48 +1,135 @@
-import sys
-sys.path.append('../queue_and_stack')
-from dll_queue import Queue
 from dll_stack import Stack
+from dll_queue import Queue
+# import sys
+# sys.path.append('../queue_and_stack')
 
 
 class BinarySearchTree:
     def __init__(self, value):
+        # value at the current node
         self.value = value
+        # reference to the nodes left child
         self.left = None
+        # reference to the nodes right child
         self.right = None
 
     # Insert the given value into the tree
+
     def insert(self, value):
-        pass
+        # if the value being passed in the insert, is less than the value of the current node
+        if value < self.value:
+            # check to see if the node to its left exists
+            if self.left is None:
+                # if true,  create a new node for the left side of the tree
+                self.left = BinarySearchTree(value)
+            else:
+                # else, insert a new node to compare to the current node
+                self.left.insert(value)
+        # if the value of the new node is >= the current node
+        elif value >= self.value:
+            # if a node to the right doesn't exist
+            if self.right is None:
+                # place that new value as the node to the right.
+                self.right = BinarySearchTree(value)
+            else:
+                # else insert the new node to the right of the current node.
+                self.right.insert(value)
 
     # Return True if the tree contains the value
     # False if it does not
+
     def contains(self, target):
-        pass
+        # if node.value == self.target
+        if self.value == target:
+            #  return true
+            return True
+        # if the value is none, return false
+        if self.value is None:
+            return False
+        else:
+            # checks to see if the target is less than the current node
+            if target < self.value:
+                # if true, check to see if the next node to the left is not None
+                if self.left is not None:
+                    # recurse through the left side until the target returns true.
+                    return self.left.contains(target)
+            # checks to see if the target is >= the current node
+            if target >= self.value:
+                # if true, check to see if the next node to the right is not None
+                if self.right is not None:
+                    return self.right.contains(target)
 
     # Return the maximum value found in the tree
+
     def get_max(self):
-        pass
+        if self.right is not None:
+            return self.right.get_max()
+        else:
+            return self.value
 
     # Call the function `cb` on the value of each node
     # You may use a recursive or iterative approach
+
     def for_each(self, cb):
-        pass
+        cb(self.value)
+        if self.left is not None:
+            self.left.for_each(cb)
+        if self.right is not None:
+            self.right.for_each(cb)
 
     # DAY 2 Project -----------------------
 
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
+
+    # UNDERSTAND:
+    #   IN ORDER = LNR : LEFT - NODE - RIGHT
+    #       EXAMINES THE FIRST NODE, CHECKS LEFT UNTIL IT CAN'T GO LEFT (PRINT)
     def in_order_print(self, node):
-        pass
+        # PLAN
+        # # If self.right and self.left is None: ---- if both left and right don't exist. print the current node
+        # if self.value is not None:
+
+        # if not node.left:
+        #     print(node.value)
+        # if node.left:
+        #     node.left.in_order_print(node.left)
+        #     print(node.value)
+        # if node.right:
+        #     node.right.in_order_print(node.right)
+        if self.left is None:
+            print(self.value)
+        if self.left is not None:
+            self.left.in_order_print(node.left)
+            print(self.value)
+        if self.right is not None:
+            self.right.in_order_print(node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
+    # FIFO
+
     def bft_print(self, node):
+        # create a queue
+        # add root to queue
+        # while queue is not empty:
+        # node = head of queue
+        # DO THE THING!! (PRINT)
+        # add children of node to queue
+        # pop node of queue
+        #
+
         pass
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
+        # create queue
+        # add root to queue
+        # while queue is not empty
+        # node = pop top of stack
+        # do the thing
+        # add children of to the stack
         pass
 
     # STRETCH Goals -------------------------
@@ -55,3 +142,14 @@ class BinarySearchTree:
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
         pass
+
+
+bst = BinarySearchTree(1)
+bst.insert(8)
+bst.insert(5)
+bst.insert(7)
+bst.insert(6)
+bst.insert(3)
+bst.insert(4)
+bst.insert(2)
+print(bst.in_order_print(bst))
