@@ -128,7 +128,7 @@ class BinarySearchTree:
     def dft_print(self, node):
         stack = Stack()
         stack.push(node)
-        while len(stack) > 0:
+        while stack is not None:
             cur = stack.pop()
             print(cur.value)
             if cur.left:
