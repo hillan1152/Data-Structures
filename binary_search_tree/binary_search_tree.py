@@ -109,17 +109,14 @@ class BinarySearchTree:
         que = Queue()
         # add root to queue
         que.enqueue(node)
+        # while queue is not empty:
         while que is not None:
-            # while queue is not empty:
-            node = que.dequeue()
-            print(node.value)
-            # node = head of queue
-            if node.left is not None:
-                # print("LEFT OF CURRENT NODE ---> ", node.left)
-                que.enqueue(node.left)
-            if node.right is not None:
-                # print("right OF CURRENT NODE ---> ", node.right)
-                que.enqueue(node.right)
+            curr_node = que.dequeue()
+            print(curr_node.value)
+            if curr_node.left:
+                que.enqueue(curr_node.left)
+            if curr_node.right:
+                que.enqueue(curr_node.right)
             # DO THE THING!! (PRINT)
             # add children of node to queue
             # pop node of queue
