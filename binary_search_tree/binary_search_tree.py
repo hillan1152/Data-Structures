@@ -88,41 +88,46 @@ class BinarySearchTree:
     def in_order_print(self, node):
         # PLAN
         # # If self.right and self.left is None: ---- if both left and right don't exist. print the current node
-        # if self.value is not None:
-
-        # if not node.left:
-        #     print(node.value)
-        # if node.left:
-        #     node.left.in_order_print(node.left)
-        #     print(node.value)
-        # if node.right:
-        #     node.right.in_order_print(node.right)
-        if self.left is None:
-            print(self.value)
-        if self.left is not None:
-            self.left.in_order_print(node.left)
-            print(self.value)
-        if self.right is not None:
-            self.right.in_order_print(node.right)
+        # check if value is not empty.
+        if self.value is not None:
+            # if the left node is none, print it
+            if self.left is None:
+                print(self.value)
+            # if the left node exists, run the function, and print the value.
+            if self.left is not None:
+                self.left.in_order_print(self.left)
+                print(self.value)
+            # if the left node exists, run the function. Don't print b/c we don't need it
+            if self.right is not None:
+                self.right.in_order_print(self.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
     # FIFO
-
     def bft_print(self, node):
         # create a queue
+        que = Queue()
         # add root to queue
-        # while queue is not empty:
-        # node = head of queue
-        # DO THE THING!! (PRINT)
-        # add children of node to queue
-        # pop node of queue
-        #
-
-        pass
+        que.enqueue(node)
+        while que is not None:
+            # while queue is not empty:
+            node = que.dequeue()
+            print(node.value)
+            # node = head of queue
+            if node.left is not None:
+                # print("LEFT OF CURRENT NODE ---> ", node.left)
+                que.enqueue(node.left)
+            if node.right is not None:
+                # print("right OF CURRENT NODE ---> ", node.right)
+                que.enqueue(node.right)
+            # DO THE THING!! (PRINT)
+            # add children of node to queue
+            # pop node of queue
+            #
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
+
     def dft_print(self, node):
         # create queue
         # add root to queue
@@ -152,4 +157,4 @@ bst.insert(6)
 bst.insert(3)
 bst.insert(4)
 bst.insert(2)
-print(bst.in_order_print(bst))
+print(bst.bft_print(bst))
