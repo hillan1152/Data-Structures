@@ -126,13 +126,21 @@ class BinarySearchTree:
     # in an iterative depth first traversal
 
     def dft_print(self, node):
+        stack = Stack()
+        stack.push(node)
+        while len(stack) > 0:
+            cur = stack.pop()
+            print(cur.value)
+            if cur.left:
+                stack.push(cur.left)
+            if cur.right:
+                stack.push(cur.right)
         # create queue
         # add root to queue
         # while queue is not empty
         # node = pop top of stack
         # do the thing
         # add children of to the stack
-        pass
 
     # STRETCH Goals -------------------------
     # Note: Research may be required
@@ -154,4 +162,4 @@ bst.insert(6)
 bst.insert(3)
 bst.insert(4)
 bst.insert(2)
-print(bst.bft_print(bst))
+bst.bft_print(bst)
