@@ -39,8 +39,7 @@ class LRUCache:
             self.dll.move_to_front(self.storage[key])
             # print("KEY IN STORAGE --> ", self.storage[key].value[1])
             return self.storage[key].value[1]
-        else:
-            return None
+        return None
 
     """
     Adds the given key-value pair to the cache. The newly-
@@ -64,17 +63,16 @@ class LRUCache:
         if self.size == self.limit:
             del self.storage[self.dll.tail.value[0]]
             self.dll.remove_from_tail()
-            self.size += 1
         self.dll.add_to_head((key, value))
         self.storage[key] = self.dll.head
         self.size += 1
 
 
-cache = LRUCache(3)
-cache.set('item1', 'a')
-cache.set('item2', 'b')
-cache.set('item3', 'c')
-cache.set('item2', 'z')
-print("Get --> ", cache.get('item1'))
+# cache = LRUCache(3)
+# cache.set('item1', 'a')
+# cache.set('item2', 'b')
+# cache.set('item3', 'c')
+# cache.set('item2', 'z')
+# print("Get --> ", cache.get('item1'))
 # print("Storage --> ", cache.storage)
 # print("Size --> ", cache.size)
