@@ -60,18 +60,49 @@ class BinarySearchTree:
     # Print all the values in order from low to high
     # Hint:  Use a recursive, depth first traversal
 
+    # LIFO
+    # LNR
     def in_order_print(self, node):
-        pass
+        curr_value = self.value
+        left = self.left
+        right = self.right
+        if curr_value:
+            if left is None:
+                print(curr_value)
+            if left:
+                left.in_order_print(left)
+                print(curr_value)
+            if right:
+                right.in_order_print(right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative breadth first traversal
+
+    # FIFO
+    # QUEUE
     def bft_print(self, node):
-        pass
+        que = Queue()
+        que.enqueue(node)
+        while que is not None:
+            curr_node = que.dequeue()
+            print(curr_node.value)
+            if curr_node.left:
+                que.enqueue(curr_node.left)
+            if curr_node.right:
+                que.enqueue(curr_node.right)
 
     # Print the value of every node, starting with the given node,
     # in an iterative depth first traversal
     def dft_print(self, node):
-        pass
+        stack = Stack()
+        stack.push(node)
+        while stack is not None:
+            curr_pop = stack.pop()
+            print(curr_pop.value)
+            if curr_pop.left:
+                stack.push(curr_pop.left)
+            if curr_pop.right:
+                stack.push(curr_pop.right)
 
     # STRETCH Goals -------------------------
     # Note: Research may be required
@@ -83,3 +114,13 @@ class BinarySearchTree:
     # Print Post-order recursive DFT
     def post_order_dft(self, node):
         pass
+
+
+# b = BinarySearchTree(6)
+# b.insert(4)
+# b.insert(1)
+# b.insert(5)
+# b.insert(8)
+# b.insert(9)
+
+# b.bft_print(b)
